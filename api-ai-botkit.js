@@ -114,15 +114,18 @@ function createApiAiProcessing(token) {
                     });
 
                     if (isDefined(response.result)) {
-                        let action = response.result.action;
-
-                        if (isDefined(action)) {
-                            if (worker.actionCallbacks[action]) {
-                                worker.actionCallbacks[action].forEach((callback) => {
-                                    callback(message, response, bot);
-                                });
-                            }
+                      let action = response.result.action;
+                      if (isDefined(action)) {
+                        if (worker.actionCallbacks[action]) {
+                          worker.actionCallbacks[action].forEach((callback) => {
+                            callback(message, response, bot);
+                          });
+                        }else{
+                          worker.actionCallbacks['anythingelse'].forEach((callback) => {
+                            callback(message, response, bot);
+                          });
                         }
+                      }
                     }
                 });
 
