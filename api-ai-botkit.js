@@ -49,12 +49,7 @@ function createApiAiProcessing(token) {
     worker.allCallback = [];
 
     worker.action = function (action, callback) {
-        if (worker.actionCallbacks[action]) {
-            worker.actionCallbacks[action].push(callback);
-        } else {
-            worker.actionCallbacks[action] = [callback];
-        }
-
+        worker.actionCallbacks[action] = [callback];
         return worker;
     };
 
